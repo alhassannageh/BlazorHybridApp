@@ -5,20 +5,22 @@ namespace BlazorHybridApp;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.RegisterBlazorMauiWebView()
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-			});
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            //.RegisterBlazorMauiWebView() // Remove this line!
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            });
 
-		builder.Services.AddBlazorWebView();
-		builder.Services.AddSingleton<WeatherForecastService>();
+        // builder.Services.AddBlazorWebView(); // You can remove this line
+        builder.Services.AddMauiBlazorWebView(); // Add this line
+        builder.Services.AddSingleton<WeatherForecastService>();
 
-		return builder.Build();
-	}
+        return builder.Build();
+    }
 }
+
